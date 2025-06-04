@@ -1,3 +1,0 @@
-def parse_function(integratable:str) -> function:
-    
-    ...
