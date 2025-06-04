@@ -60,11 +60,16 @@ def integrate(func:str, low:float, high:float) -> float:
         prev_deriv = deriv
     return ans*bro
 
-func = input("f(x) = ")
-low = float(input())
-high = float(input())
-print("integral of f(x) from low to high --> ")
-try:
-    print(integrate(func, low, high))
-except:
-    print("could not be evaluated")
+def do_integrating(func:str, low:float, high:float) -> str:
+    try: return str(integrate(func, low, high))
+    except: return "could not be evaluated"
+
+if __name__ == "__main__":
+    func = input("f(x) = ")
+    low = float(input())
+    high = float(input())
+    print("integral of f(x) from low to high --> ")
+    try:
+        print(integrate(func, low, high))
+    except:
+        print("could not be evaluated")
