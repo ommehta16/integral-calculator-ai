@@ -5,10 +5,6 @@ from math import acos as arccos
 from math import atan as arctan
 import math
 
-func = "x+10 + 10^x + (1+10x)"
-lo = 0
-hi = 10
-
 def process_fn(func:str) -> str:
     func = func.replace("^","**").replace(" ","")
     func = func.lower()
@@ -23,7 +19,7 @@ def process_fn(func:str) -> str:
 
 def evaluate(processed_func, x):
     try:
-        res = eval(processed_func, {"x":x})
+        res = eval(processed_func)
         return res
     except Exception as e:
         raise e
@@ -51,7 +47,7 @@ def integrate(func:str, low:float, high:float) -> float:
         deriv:float = (rn-prev)/step
 
         goof = abs(100-(deriv-prev_deriv))
-        step = max(min(goof/10,0.01),0.0001)
+        step = max(min(goof,0.05),0.0001)
         curr += step
 
         ans += step*rn
@@ -62,14 +58,11 @@ def integrate(func:str, low:float, high:float) -> float:
 
 def do_integrating(func:str, low:float, high:float) -> str:
     try: return str(integrate(func, low, high))
-    except: return "could not be evaluated"
+    except Exception as e: return "CNBD"
 
 if __name__ == "__main__":
     func = input("f(x) = ")
     low = float(input())
     high = float(input())
     print("integral of f(x) from low to high --> ")
-    try:
-        print(integrate(func, low, high))
-    except:
-        print("could not be evaluated")
+    print(do_integrating(func, low, high))
