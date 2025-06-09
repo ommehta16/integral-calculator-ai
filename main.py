@@ -38,6 +38,7 @@ def integrate(func:str, low:float, high:float) -> float:
     rn = 0
     prev = 0
     prev_deriv = 0
+    hi_step = (high-low)/1000
     while curr <= high:
         try:
             rn = evaluate(processed, curr)
@@ -45,9 +46,9 @@ def integrate(func:str, low:float, high:float) -> float:
             raise e
 
         deriv:float = (rn-prev)/step
-
+        
         goof = abs(100-(deriv-prev_deriv))
-        step = max(min(goof,0.05),0.0001)
+        step = max(min(goof,hi_step),0.0001)
         curr += step
 
         ans += step*rn

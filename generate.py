@@ -56,10 +56,10 @@ tests = open(f"functions{num}.csv",'w')
 for t in range(int(1e4)):
     print(t)
     out = ""
-    func = generate(min(t//10 + 5,100))
+    func = generate(min(t//20 + 5,40))
     for _ in range(100):
         lo = (1-2*random.random())*1e2
         hi = (1-2*random.random())*1e2
         ans = do_integrating(func, lo, hi)
-        out += f"{func},{lo},{hi},{ans}\n"
+        out += f'''"{func}",{lo},{hi},"{ans}"\n'''
     tests.write(out)
